@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ── Tailwind v4 Theme Configuration ────────── */
+@theme {
+  --color-bg-primary: #0B1020;
+  --color-bg-sidebar: #0F172A;
+  --color-bg-card: #111827;
+  --color-border-primary: rgba(255, 255, 255, 0.08);
+  
+  --color-accent-blue: #3B82F6;
+  --color-accent-green: #10B981;
+  --color-accent-orange: #F59E0B;
+  --color-accent-purple: #8B5CF6;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Design System Variables ────────────────── */
+:root {
+  --bg-primary: #0B1020;
+  --bg-sidebar: #0F172A;
+  --bg-card: #111827;
+  
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --text-muted: #475569;
+  
+  --accent-blue: #3B82F6;
+  --accent-green: #10B981;
+  --accent-orange: #F59E0B;
+  --accent-purple: #8B5CF6;
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 2px 8px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Base Reset ────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbars ────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B1020;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Enterprise Card Component ──────────────── */
+.enterprise-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 18px; /* Mockup: 18px radius */
+  padding: 24px; /* Mockup: 24px padding */
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enterprise-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5), 0 8px 16px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Status Dots ────────────────────────────── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot-active {
+  background: var(--accent-green);
+}
+
+.status-dot-warning {
+  background: var(--accent-orange);
+}
+
+.status-dot-critical {
+  background: var(--accent-rose);
+}
+
+/* ── Sidebar Navigation Link ────────────────── */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.sidebar-link.active {
+  background: rgba(59, 130, 246, 0.12); /* Subtle blue tint */
+  color: #FFFFFF;
+  font-weight: 600;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* ── Recharts Tooltip Customization ──────────── */
+.recharts-default-tooltip {
+  background-color: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.recharts-tooltip-item {
+  color: #FFFFFF !important;
+}
