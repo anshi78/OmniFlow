@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: omniflow-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: omniflow-backend:latest
+          imagePullPolicy: Never # Using locally built image
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql+asyncpg://omniflow:omniflow@postgres:5432/omniflow"
+            - name: REDIS_URL
+              value: "redis://redis:6379/0"
+            - name: REDIS_MODE
+              value: "redis"
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: KAFKA_MODE
+              value: "kafka"
+            - name: LLM_MODE
+              value: "mock"
+            - name: SECRET_KEY
+              value: "production-secret-key-change-me"
+            - name: JWT_SECRET_KEY
+              value: "production-jwt-secret-key-change-me"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: omniflow-ai
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: backend
