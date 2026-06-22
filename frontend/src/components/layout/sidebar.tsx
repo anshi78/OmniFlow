@@ -50,7 +50,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
         isCollapsed ? "w-[72px]" : "w-[260px]"
       }`}
     >
-      {/* ── LOGO SECTION ── */}
+      {/* LOGO SECTION */}
       <div>
         <div className="h-[72px] flex items-center px-6 border-b border-white/10">
           <Link href="/" className="flex items-center gap-3 overflow-hidden">
@@ -66,7 +66,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
           </Link>
         </div>
 
-        {/* ── NAVIGATION LISTS ── */}
+        {/* NAVIGATION LISTS */}
         <div className="py-6 overflow-y-auto px-4 space-y-7 max-h-[calc(100vh-190px)]">
           {menuSections.map((section, sIdx) => (
             <div key={sIdx} className="space-y-2">
@@ -97,7 +97,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
         </div>
       </div>
 
-      {/* ── FOOTER USER PROFILE CARD ── */}
+      {/* FOOTER USER PROFILE CARD */}
       <div className="p-4 border-t border-white/10 space-y-2 bg-[#0A0F1D]/45">
         <div className="flex items-center justify-between gap-3 overflow-hidden">
           <div className="flex items-center gap-3 overflow-hidden">

@@ -38,11 +38,11 @@ class SimulationService:
         sim_id = str(uuid.uuid4())
         logger.info(f"🎭 Starting digital twin simulation '{scenario_type}' (ID: {sim_id})")
         
-        # ── 1. Create Digital Twin Snapshot ──
+        # 1. Create Digital Twin Snapshot
         digital_twin.create_snapshot(sim_id)
         
         try:
-            # ── 2. Determine affected categories/locations ──
+            # 2. Determine affected categories/locations
             magnitude = parameters.get("magnitude", 3.0)
             duration_days = parameters.get("duration_days", 7)
             
@@ -67,7 +67,7 @@ class SimulationService:
             elif scenario_type == "supplier_strike":
                 disruption_context["categories"] = ["Electronics"]
 
-            # ── 3. Run Forecasts with Disruption Injection ──
+            # 3. Run Forecasts with Disruption Injection
             # Generate temporary forecasts reflecting the disruption
             await forecast_service.generate_system_forecasts(
                 db_session,
@@ -75,14 +75,14 @@ class SimulationService:
                 external_disruptions=disruption_context
             )
 
-            # ── 4. Run Multi-Agent Graph Node Decisions ──
+            # 4. Run Multi-Agent Graph Node Decisions
             agent_result = await run_agent_workflow(
                 query=f"Evaluate and resolve disruption scenario: {scenario_type}",
                 simulation_context={"scenario_type": scenario_type, "parameters": parameters},
                 db_session=db_session
             )
 
-            # ── 5. Calculate Metrics ──
+            # 5. Calculate Metrics
             products_count = (await db_session.execute(select(Product))).scalars().all()
             stores_count = (await db_session.execute(select(Store))).scalars().all()
             
@@ -131,7 +131,7 @@ class SimulationService:
             }
             
         finally:
-            # ── 6. Rollback Digital Twin state to preserve database levels ──
+            # 6. Rollback Digital Twin state to preserve database levels
             digital_twin.rollback_snapshot(sim_id)
             logger.info(f"↩️ Digital Twin state restored for snapshot '{sim_id}'")
 

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── Tailwind v4 Theme Configuration ────────── */
+/* Tailwind v4 Theme Configuration */
 @theme {
   --color-bg-primary: #0B1020;
   --color-bg-sidebar: #0F172A;
@@ -15,7 +15,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* ── Design System Variables ────────────────── */
+/* Design System Variables */
 :root {
   --bg-primary: #0B1020;
   --bg-sidebar: #0F172A;
@@ -34,7 +34,7 @@
   --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 2px 8px -1px rgba(0, 0, 0, 0.2);
 }
 
-/* ── Base Reset ────────────────────────────── */
+/* Base Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -49,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Scrollbars ────────────────────────────── */
+/* Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -68,7 +68,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ── Enterprise Card Component ──────────────── */
+/* Enterprise Card Component */
 .enterprise-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -83,7 +83,7 @@ body {
   box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5), 0 8px 16px -6px rgba(0, 0, 0, 0.4);
 }
 
-/* ── Status Dots ────────────────────────────── */
+/* Status Dots */
 .status-dot {
   width: 8px;
   height: 8px;
@@ -103,7 +103,7 @@ body {
   background: var(--accent-rose);
 }
 
-/* ── Sidebar Navigation Link ────────────────── */
+/* Sidebar Navigation Link */
 .sidebar-link {
   display: flex;
   align-items: center;
@@ -129,7 +129,7 @@ body {
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-/* ── Recharts Tooltip Customization ──────────── */
+/* Recharts Tooltip Customization */
 .recharts-default-tooltip {
   background-color: #111827 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;

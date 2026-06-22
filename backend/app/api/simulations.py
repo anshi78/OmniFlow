@@ -17,7 +17,7 @@ from app.schemas.simulation import SimulationRequest, SimulationResponse
 
 router = APIRouter(prefix="/simulations", tags=["Simulations"])
 
-# ── Scenario Templates ──────────────────────────────────────────────────
+# Scenario Templates
 SCENARIO_TEMPLATES = {
     "demand_spike": {
         "title": "Demand Spike Simulation",

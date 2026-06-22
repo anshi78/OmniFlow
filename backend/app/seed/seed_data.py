@@ -12,7 +12,7 @@ from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# ── Products ─────────────────────────────────────────────────────────────
+# Products
 PRODUCTS = [
     # Electronics
     {"sku": "ELEC-001", "name": "Wireless Noise-Cancelling Headphones", "category": "Electronics", "subcategory": "Audio", "unit_price": 149.99, "cost_price": 65.00, "weight_kg": 0.3},
@@ -71,7 +71,7 @@ PRODUCTS = [
     {"sku": "SPRT-010", "name": "Cycling Helmet", "category": "Sports", "subcategory": "Cycling", "unit_price": 59.99, "cost_price": 22.00, "weight_kg": 0.25},
 ]
 
-# ── Stores ───────────────────────────────────────────────────────────────
+# Stores
 STORES = [
     {"code": "NYC-001", "name": "OmniStore Manhattan", "location": "350 5th Ave", "city": "New York", "region": "Northeast", "latitude": 40.7484, "longitude": -73.9857, "capacity": 15000},
     {"code": "LA-001", "name": "OmniStore Los Angeles", "location": "6801 Hollywood Blvd", "city": "Los Angeles", "region": "West", "latitude": 34.1016, "longitude": -118.3267, "capacity": 18000},
@@ -85,7 +85,7 @@ STORES = [
     {"code": "BOS-001", "name": "OmniStore Boston", "location": "1 City Hall Square", "city": "Boston", "region": "Northeast", "latitude": 42.3601, "longitude": -71.0589, "capacity": 11000},
 ]
 
-# ── Warehouses ───────────────────────────────────────────────────────────
+# Warehouses
 WAREHOUSES = [
     {"code": "WH-EAST", "name": "East Coast Distribution Center", "location": "Newark, NJ", "city": "Newark", "region": "Northeast", "latitude": 40.7357, "longitude": -74.1724, "capacity": 100000},
     {"code": "WH-WEST", "name": "West Coast Distribution Center", "location": "Ontario, CA", "city": "Ontario", "region": "West", "latitude": 34.0633, "longitude": -117.6509, "capacity": 120000},
@@ -115,7 +115,7 @@ async def seed_database(session: AsyncSession) -> dict:
 
     counts = {}
 
-    # ── Users ──
+    # Users
     admin = User(
         id=str(uuid.uuid4()),
         email="admin@omniflow.ai",
@@ -133,7 +133,7 @@ async def seed_database(session: AsyncSession) -> dict:
     session.add_all([admin, manager])
     counts["users"] = 2
 
-    # ── Products ──
+    # Products
     product_ids = {}
     for p in PRODUCTS:
         pid = str(uuid.uuid4())
@@ -141,7 +141,7 @@ async def seed_database(session: AsyncSession) -> dict:
         session.add(Product(id=pid, **p))
     counts["products"] = len(PRODUCTS)
 
-    # ── Stores ──
+    # Stores
     store_ids = {}
     for s in STORES:
         sid = str(uuid.uuid4())
@@ -149,7 +149,7 @@ async def seed_database(session: AsyncSession) -> dict:
         session.add(Store(id=sid, **s))
     counts["stores"] = len(STORES)
 
-    # ── Warehouses ──
+    # Warehouses
     wh_ids = {}
     for w in WAREHOUSES:
         wid = str(uuid.uuid4())
@@ -159,7 +159,7 @@ async def seed_database(session: AsyncSession) -> dict:
 
     await session.flush()
 
-    # ── Inventory (store inventory) ──
+    # Inventory (store inventory)
     inv_count = 0
     for sku, pid in product_ids.items():
         # Each product in 3-6 random stores
@@ -212,7 +212,7 @@ async def seed_database(session: AsyncSession) -> dict:
 
     await session.flush()
 
-    # ── Forecasts (7-day) ──
+    # Forecasts (7-day)
     forecast_count = 0
     today = datetime.utcnow().date()
     sample_products = random.sample(list(product_ids.items()), k=min(20, len(product_ids)))
@@ -242,7 +242,7 @@ async def seed_database(session: AsyncSession) -> dict:
             forecast_count += 1
     counts["forecasts"] = forecast_count
 
-    # ── Agent Events ──
+    # Agent Events
     agent_names = ["orchestrator", "demand_forecast", "store_agent", "warehouse_agent"]
     event_types = ["decision", "alert", "recommendation"]
     event_titles = [
@@ -278,7 +278,7 @@ async def seed_database(session: AsyncSession) -> dict:
         ))
     counts["agent_events"] = 30
 
-    # ── Recommendations ──
+    # Recommendations
     rec_types = ["restock", "transfer", "reorder", "alert", "optimize"]
     for i in range(15):
         product = random.choice(PRODUCTS)

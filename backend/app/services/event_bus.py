@@ -57,13 +57,13 @@ class EventBusService:
             "payload": payload,
         }
         
-        # ── In-Memory Routing ──
+        # In-Memory Routing
         if topic in self.listeners:
             tasks = [cb(payload) for cb in self.listeners[topic]]
             if tasks:
                 await asyncio.gather(*tasks, return_exceptions=True)
 
-        # ── Real-Time UI Broadcast ──
+        # Real-Time UI Broadcast
         # Import dynamically to avoid circular dependencies
         try:
             from app.api.websocket import manager
@@ -75,7 +75,7 @@ class EventBusService:
         except Exception as e:
             logger.debug(f"WS broadcast failed: {e}")
 
-        # ── Kafka Routing ──
+        # Kafka Routing
         if self.use_kafka and self.producer:
             try:
                 await self.producer.send_and_wait(

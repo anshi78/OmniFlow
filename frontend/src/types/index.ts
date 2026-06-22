@@ -1,6 +1,6 @@
 /* OmniFlow AI — TypeScript Type Definitions */
 
-// ── Products ────────────────────────────────
+// Products
 export interface Product {
   id: string;
   sku: string;
@@ -24,7 +24,7 @@ export interface ProductWithInventory extends Product {
   stock_status: string;
 }
 
-// ── Stores ──────────────────────────────────
+// Stores
 export interface Store {
   id: string;
   name: string;
@@ -47,7 +47,7 @@ export interface StoreWithStats extends Store {
   stockout_risk: number;
 }
 
-// ── Warehouses ──────────────────────────────
+// Warehouses
 export interface Warehouse {
   id: string;
   name: string;
@@ -63,7 +63,7 @@ export interface Warehouse {
   created_at: string;
 }
 
-// ── Inventory ───────────────────────────────
+// Inventory
 export interface InventoryItem {
   id: string;
   product_id: string;
@@ -98,7 +98,7 @@ export interface InventoryHealth {
   stockout_risk_percent: number;
 }
 
-// ── Shipments ───────────────────────────────
+// Shipments
 export interface Shipment {
   id: string;
   from_warehouse_id: string;
@@ -121,7 +121,7 @@ export interface Shipment {
   updated_at: string;
 }
 
-// ── Forecasts ───────────────────────────────
+// Forecasts
 export interface Forecast {
   id: string;
   product_id: string;
@@ -150,7 +150,7 @@ export interface ForecastSeries {
   actual: (number | null)[];
 }
 
-// ── Dashboard ───────────────────────────────
+// Dashboard
 export interface DashboardStats {
   total_inventory: number;
   total_products: number;
@@ -191,7 +191,7 @@ export interface DashboardData {
   recent_recommendations: Recommendation[];
 }
 
-// ── Agents ───────────────────────────────────
+// Agents
 export interface Agent {
   id: string;
   name: string;
@@ -221,7 +221,7 @@ export interface AgentGraphData {
   edges: { from: string; to: string; label: string }[];
 }
 
-// ── Recommendations ─────────────────────────
+// Recommendations
 export interface Recommendation {
   id: string;
   agent_name: string;
@@ -239,7 +239,7 @@ export interface Recommendation {
   created_at: string;
 }
 
-// ── Simulations ─────────────────────────────
+// Simulations
 export interface SimulationScenario {
   type: string;
   title: string;
@@ -271,7 +271,7 @@ export interface AgentAction {
   timestamp: string;
 }
 
-// ── Auth ─────────────────────────────────────
+// Auth
 export interface User {
   id: string;
   email: string;

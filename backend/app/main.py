@@ -18,7 +18,7 @@ logger = logging.getLogger("omniflow")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan — startup and shutdown hooks."""
-    # ── Startup ──
+    # Startup
     logger.info("🚀 Starting OmniFlow AI...")
 
     # Initialize database tables (dev mode with SQLite)
@@ -37,7 +37,7 @@ async def lifespan(app: FastAPI):
     logger.info("✅ OmniFlow AI is ready!")
     yield
 
-    # ── Shutdown ──
+    # Shutdown
     await close_db()
     logger.info("🛑 OmniFlow AI shutdown complete")
 
@@ -51,7 +51,7 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# ── CORS ──
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:3001", "*"],
@@ -60,7 +60,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Register Routers ──
+# Register Routers
 app.include_router(auth.router, prefix="/api")
 app.include_router(products.router, prefix="/api")
 app.include_router(stores.router, prefix="/api")

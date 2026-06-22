@@ -41,12 +41,12 @@ class ApiClient {
     return response.json();
   }
 
-  // ── Dashboard ──
+  // Dashboard
   async getDashboard() {
     return this.request<import("@/types").DashboardData>("/dashboard");
   }
 
-  // ── Products ──
+  // Products
   async getProducts(params?: { category?: string; search?: string }) {
     const query = new URLSearchParams();
     if (params?.category) query.set("category", params.category);
@@ -59,18 +59,18 @@ class ApiClient {
     return this.request<string[]>("/products/categories");
   }
 
-  // ── Stores ──
+  // Stores
   async getStores(region?: string) {
     const qs = region ? `?region=${region}` : "";
     return this.request<import("@/types").Store[]>(`/stores${qs}`);
   }
 
-  // ── Warehouses ──
+  // Warehouses
   async getWarehouses() {
     return this.request<import("@/types").Warehouse[]>("/warehouses");
   }
 
-  // ── Inventory ──
+  // Inventory
   async getInventory(params?: {
     location_type?: string;
     status?: string;
@@ -90,7 +90,7 @@ class ApiClient {
     return this.request<import("@/types").InventoryHealth>("/inventory/health");
   }
 
-  // ── Forecasts ──
+  // Forecasts
   async getForecasts(productId?: string) {
     const qs = productId ? `?product_id=${productId}` : "";
     return this.request<import("@/types").Forecast[]>(`/forecasts${qs}`);
@@ -102,7 +102,7 @@ class ApiClient {
     );
   }
 
-  // ── Simulations ──
+  // Simulations
   async getScenarios() {
     return this.request<import("@/types").SimulationScenario[]>("/simulations/scenarios");
   }
@@ -118,7 +118,7 @@ class ApiClient {
     return this.request<import("@/types").SimulationResult[]>("/simulations");
   }
 
-  // ── Agents ──
+  // Agents
   async getAgentsStatus() {
     return this.request<import("@/types").Agent[]>("/agents/status");
   }
@@ -145,13 +145,13 @@ class ApiClient {
     );
   }
 
-  // ── Shipments ──
+  // Shipments
   async getShipments(status?: string) {
     const qs = status ? `?status=${status}` : "";
     return this.request<import("@/types").Shipment[]>(`/shipments${qs}`);
   }
 
-  // ── Auth ──
+  // Auth
   async login(email: string, password: string) {
     return this.request<import("@/types").AuthToken>("/auth/login", {
       method: "POST",

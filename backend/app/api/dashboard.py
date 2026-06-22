@@ -27,7 +27,7 @@ router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
     """Get aggregated dashboard data."""
 
-    # ── Core counts ──
+    # Core counts
     products_count = (await db.execute(
         select(func.count()).select_from(Product).where(Product.is_active == True)
     )).scalar()
@@ -40,19 +40,19 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
         select(func.count()).select_from(Warehouse).where(Warehouse.is_active == True)
     )).scalar()
 
-    # ── Inventory totals ──
+    # Inventory totals
     inv_result = (await db.execute(
         select(func.coalesce(func.sum(Inventory.quantity), 0))
     )).scalar()
 
-    # ── Inventory value ──
+    # Inventory value
     value_result = (await db.execute(
         select(func.coalesce(func.sum(Inventory.quantity * Product.unit_price), 0)).select_from(
             Inventory
         ).join(Product, Inventory.product_id == Product.id)
     )).scalar()
 
-    # ── Stockout risk ──
+    # Stockout risk
     critical_count = (await db.execute(
         select(func.count()).select_from(Inventory).where(Inventory.status == "critical")
     )).scalar()
@@ -61,20 +61,20 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
     )).scalar()
     stockout_risk = round((critical_count / max(total_inv, 1)) * 100, 1)
 
-    # ── Predicted demand ──
+    # Predicted demand
     demand_7d = (await db.execute(
         select(func.coalesce(func.sum(Forecast.predicted_demand), 0))
         .where(Forecast.horizon_days == 7)
     )).scalar()
 
-    # ── Active shipments ──
+    # Active shipments
     active_shipments = (await db.execute(
         select(func.count()).select_from(Shipment).where(
             Shipment.status.in_(["pending", "in_transit"])
         )
     )).scalar()
 
-    # ── Active decisions and recommendations ──
+    # Active decisions and recommendations
     active_decisions = (await db.execute(
         select(func.count()).select_from(AgentEvent)
     )).scalar()
@@ -105,7 +105,7 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
         total_inventory_value=round(value_result, 2),
     )
 
-    # ── Inventory by category ──
+    # Inventory by category
     cat_result = await db.execute(
         select(
             Product.category,
@@ -129,7 +129,7 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
         for row in cat_result.all()
     ]
 
-    # ── Region risks ──
+    # Region risks
     region_result = await db.execute(
         select(
             Store.region,
@@ -161,7 +161,7 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
             critical_items=crit,
         ))
 
-    # ── Recent agent events ──
+    # Recent agent events
     events_result = await db.execute(
         select(AgentEvent)
         .order_by(desc(AgentEvent.timestamp))
@@ -170,17 +170,17 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
     recent_events = [
         {
             "id": e.id,
-            "agent": e.agent_name,
-            "type": e.event_type,
+            "agent_name": e.agent_name,
+            "event_type": e.event_type,
             "severity": e.severity,
             "title": e.title,
-            "confidence": e.confidence_score,
+            "confidence_score": e.confidence_score,
             "timestamp": e.timestamp.isoformat() if e.timestamp else None,
         }
         for e in events_result.scalars().all()
     ]
 
-    # ── Recent recommendations ──
+    # Recent recommendations
     recs_result = await db.execute(
         select(Recommendation)
         .where(Recommendation.status == "pending")
@@ -190,13 +190,13 @@ async def get_dashboard(db: Annotated[AsyncSession, Depends(get_db)]):
     recent_recs = [
         {
             "id": r.id,
-            "agent": r.agent_name,
+            "agent_name": r.agent_name,
             "type": r.recommendation_type,
             "title": r.title,
             "priority": r.priority,
-            "confidence": r.confidence_score,
-            "savings": r.estimated_savings,
-            "timestamp": r.created_at.isoformat() if r.created_at else None,
+            "confidence_score": r.confidence_score,
+            "estimated_savings": r.estimated_savings,
+            "created_at": r.created_at.isoformat() if r.created_at else None,
         }
         for r in recs_result.scalars().all()
     ]

@@ -22,7 +22,7 @@ def build_workflow() -> StateGraph:
     
     workflow = StateGraph(SupplyChainState)
     
-    # ── Register Nodes ──
+    # Register Nodes
     workflow.add_node("orchestrator", orchestrator_agent.run)
     workflow.add_node("trend_agent", trend_agent.run)
     workflow.add_node("demand_forecast", demand_agent.run)
@@ -32,7 +32,7 @@ def build_workflow() -> StateGraph:
     workflow.add_node("logistics_agent", logistics_agent.run)
     workflow.add_node("optimizer_agent", optimizer_agent.run)
     
-    # ── Define Connections (Sequential Chain for Hackathon Simplicity) ──
+    # Define Connections (Sequential Chain for Hackathon Simplicity)
     # This ensures all agents contribute to the final state in order
     workflow.set_entry_point("orchestrator")
     

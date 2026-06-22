@@ -16,34 +16,34 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # ── App ──────────────────────────────────────
+    # App
     app_name: str = "OmniFlow AI"
     app_env: Literal["development", "staging", "production"] = "development"
     debug: bool = True
     secret_key: str = "dev-secret-key-change-in-production"
 
-    # ── Database ─────────────────────────────────
+    # Database
     database_url: str = "sqlite+aiosqlite:///./omniflow.db"
 
-    # ── Redis ────────────────────────────────────
+    # Redis
     redis_url: str = "redis://localhost:6379/0"
     redis_mode: Literal["redis", "memory"] = "memory"
 
-    # ── Kafka ────────────────────────────────────
+    # Kafka
     kafka_bootstrap_servers: str = "localhost:9092"
     kafka_mode: Literal["kafka", "memory"] = "memory"
 
-    # ── OpenAI / LLM ────────────────────────────
+    # OpenAI / LLM
     openai_api_key: str = ""
     llm_mode: Literal["openai", "mock"] = "mock"
     openai_model: str = "gpt-4o-mini"
 
-    # ── JWT Auth ─────────────────────────────────
+    # JWT Auth
     jwt_secret_key: str = "dev-jwt-secret-change-in-production"
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 1440  # 24 hours
 
-    # ── External APIs ────────────────────────────
+    # External APIs
     weather_api_key: str = ""
     google_trends_api_key: str = ""
 

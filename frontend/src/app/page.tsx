@@ -27,7 +27,7 @@ const FORECAST_DATA = [
   { date: "Jun 21", predicted: 2100, actual: 2150 },
 ];
 
-// ── Animated Counter ──
+// Animated Counter
 function AnimatedCounter({ value, duration = 1000, prefix = "", suffix = "", isDecimal = false }: {
   value: number; duration?: number; prefix?: string; suffix?: string; isDecimal?: boolean;
 }) {
@@ -53,7 +53,7 @@ function AnimatedCounter({ value, duration = 1000, prefix = "", suffix = "", isD
   return <span>{prefix}{displayVal}{suffix}</span>;
 }
 
-// ── Mini Sparkline Chart ──
+// Mini Sparkline Chart
 function Sparkline({ data, strokeColor, fillColor }: { data: number[]; strokeColor: string; fillColor: string }) {
   const chartData = data.map((val, idx) => ({ id: idx, value: val }));
   return (
@@ -80,7 +80,7 @@ function Sparkline({ data, strokeColor, fillColor }: { data: number[]; strokeCol
   );
 }
 
-// ── KPI Card Component ──
+// KPI Card Component
 function KPICard({ 
   title, value, subtitle, icon, colorClass, delay, suffix = "", prefix = "", 
   trend = "", trendUp = true, sparkData, sparkStroke, sparkFill 
@@ -122,7 +122,7 @@ function KPICard({
   );
 }
 
-// ── Radial Progress for System Health ──
+// Radial Progress for System Health
 function RadialProgress({ percent, label, color }: { percent: number; label: string; color: string }) {
   const radius = 28;
   const circumference = 2 * Math.PI * radius;
@@ -153,7 +153,7 @@ function RadialProgress({ percent, label, color }: { percent: number; label: str
   );
 }
 
-// ── World Map SVG representation ──
+// World Map SVG representation
 function WorldMap() {
   return (
     <div className="relative w-full h-[180px] flex items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-[#0A0F1D] p-2">
@@ -298,7 +298,7 @@ export default function DashboardPage() {
   return (
     <div className="px-8 py-8 space-y-6 bg-[#0B1020] min-h-screen text-gray-100 overflow-x-hidden">
       
-      {/* ── STICKY TOP NAVIGATION BAR ── */}
+      {/* STICKY TOP NAVIGATION BAR */}
       <header className="sticky top-0 z-40 bg-[#0B1020]/90 backdrop-blur-md border-b border-white/8 pb-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-[36px] font-extrabold tracking-tight text-white leading-tight">Dashboard</h1>
@@ -355,7 +355,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* ── ROW 1: KPI CARDS ── */}
+      {/* ROW 1: KPI CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <KPICard
           title="Total Inventory Value"
@@ -414,7 +414,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* ── ROW 2: DEMAND FORECAST & CATEGORY DOUGHNUT ── */}
+      {/* ROW 2: DEMAND FORECAST & CATEGORY DOUGHNUT */}
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
         {/* Demand Forecast Chart (70%) */}
         <div className="enterprise-card lg:col-span-7 flex flex-col justify-between min-h-[380px]">
@@ -516,7 +516,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ── ROW 3: HEATMAP, TIMELINE & ALERTS ── */}
+      {/* ROW 3: HEATMAP, TIMELINE & ALERTS */}
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
         {/* Risk Heatmap (35% or col-span-3.5) */}
         <div className="enterprise-card lg:col-span-3 flex flex-col justify-between min-h-[350px]">
@@ -611,7 +611,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ── ROW 4: FINANCIAL OVERVIEW ── */}
+      {/* ROW 4: FINANCIAL OVERVIEW */}
       <div className="enterprise-card min-h-[340px] flex flex-col justify-between">
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -665,7 +665,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ── ROW 5: SIMULATIONS & SYSTEM HEALTH ── */}
+      {/* ROW 5: SIMULATIONS & SYSTEM HEALTH */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Recent Simulations */}
         <div className="enterprise-card min-h-[290px] flex flex-col justify-between">
